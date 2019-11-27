@@ -1,0 +1,46 @@
+---
+layout: page
+description: "素袖藏金 jkdigger的博客"
+---
+
+{% for post in paginator.posts %}
+<div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">
+            {{ post.title }}
+        </h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">
+            {{ post.subtitle }}
+        </h3>
+        {% endif %}
+        
+        <div class="post-content-preview" style="margin: 20px auto;">
+            {{ post.content | strip_html | truncate:150 }}
+        </div>
+    </a>
+    
+    <span class="post-meta" style="margin: 15px 0;">
+        {{ post.date | date: "%Y-%m-%d" }}
+       
+    </span>
+ 
+</div>
+<hr>
+{% endfor %}
+
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+<ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; 上一页</a>
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="next">
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">下一页 &rarr;</a>
+    </li>
+    {% endif %}
+</ul>
+{% endif %}
