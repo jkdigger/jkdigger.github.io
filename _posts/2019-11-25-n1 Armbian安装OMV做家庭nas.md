@@ -103,22 +103,13 @@ Asia/Shanghai
 - 勾选 [使用NTP服务器]
 - 保存并应用
 
-### 03 新建用户
+### 03 修改自动登出时间
 
-- 访问权限管理->用户->点[添加]
+- 系统→Web管理员→常规设置
 
-```
-名称 注意不能为root
-密码
-确认密码 
+> 自动登出 改为30分钟
 
-用户组 勾选users
-```
-
-- 点击[特权]→勾选[读和写]
 - 保存并应用
-
-> 之后就可以去[我的电脑]->[网络]中看到 名为“AML”的磁盘，输入刚创建的用户名和密码就可以登入
 
 ## 3. 共享移动硬盘
 
@@ -142,34 +133,49 @@ Asia/Shanghai
 >
 > 设备：选择移动硬盘
 >
-> 路径：/
+> 路径：点击选择，/表示共享整个移动硬盘
 >
-> /表示共享整个移动硬盘
 
 - 点击[保存]
 
   ![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191126133124.png)
 
-### 03 设置新建用户对文件夹的权限
 
-- [共享文件夹]→选中刚刚添加的[share]→点击[特权]
-- 设置刚新建的用户的权限，比如：勾选 [读/写]
+
+### 03 新建用户
+
+- 访问权限管理->用户->点[添加]
+
+```
+名称 注意不能为root
+密码
+确认密码 
+
+用户组 勾选users
+```
+
+### 04 设置新建用户对文件夹的权限
+
+- 点击新建的用户
+- 点击[特权]→勾选[读和写]
 - 保存并应用
 
-### 04 通过smb把共享文件夹共享出去
+### 05 通过smb把共享文件夹共享出去
 
 -  [服务]→[SMB/CIFS] 
-- [设置]→常规设置→勾选[启用]
+- [设置]→常规设置→勾选[启用]→保存并应用
 - [共享]→点击[添加]
 
 > 共享文件夹：选择 share
 >
 
-- 点击[保存]
+- 保存并应用
 
 ![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191126133146.png) 
 
-### 05 设置移动硬盘待机
+>  之后就可以去[我的电脑]->[网络]中看到 名为“AML”的磁盘，输入刚创建的用户名和密码就可以登入
+
+### 06 设置移动硬盘待机
 
 -  存储器→磁盘
 - 选择 移动硬盘→点击[编辑]
@@ -242,7 +248,7 @@ Asia/Shanghai
 >
 > 密码 admin（修改后的密码）
 
-- 修改界面
+- 修改 transmission中文界面
 
 > ssh登入n1
 >
@@ -268,11 +274,11 @@ Asia/Shanghai
 
 - 自动更新tracker：[参考](https://github.com/AndrewMarchukov/tracker-add)
 
-> ssh登入n1
+> - moba登入n1
 >
-> 在 opt下新建bin文件夹
+> - 在 opt下新建bin文件夹
 >
-> 下载两个脚本
+> - 下载两个脚本
 >
 > ```
 > wget --no-check-certificate -O /opt/bin/add-trackers-auto.sh https://raw.githubusercontent.com/AndrewMarchukov/tracker-add/master/tracker-add-auto.sh
@@ -307,6 +313,18 @@ Asia/Shanghai
 > ctrl+c退出
 >
 > 注意：完成后添加种子就会自动更新 tracker
+
+### 04 登入transmission
+
+- 浏览器中输入n1的ip:9091即可进入transmission
+
+```
+192.168.2.111:9091
+```
+
+- 启用随机端口
+
+> 设置→网络传输→勾选[启用随机端口]
 
 ## 参考资料
 
