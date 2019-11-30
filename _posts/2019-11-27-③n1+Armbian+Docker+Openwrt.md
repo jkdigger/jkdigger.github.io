@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      n1目前最合适的旁路由方案
-subtitle:   Armbian+Docker+OpenWrt
+title:      n1+Armbian+Docker+Openwrt
+subtitle:   n1盘路由方案
 date:       2019-11-27 18:00:00
 author:     "jkdigger"
 header-img: 
