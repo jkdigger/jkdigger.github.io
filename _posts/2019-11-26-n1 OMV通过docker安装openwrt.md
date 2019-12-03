@@ -52,9 +52,8 @@ n1安装了omv开启samba作为nas使用，omv作为开源的nas解决方案稳�
 - 服务→Docker
 - 勾选 [enable the plugin]
 
-  ![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191126132635.webp)
 
->  docker镜像的默认位置是`/var/lib/docker`下 ， 第二红框 所示， 这里我创建了一个docker-base文件夹 。
+>  docker镜像的默认位置是`/var/lib/docker`下.
 
 ## 2. 安装openwrt
 
@@ -72,21 +71,22 @@ docker pull kanshudj/n1-openwrtgateway:r9.10.1
 
 ```
 ip link set eth0 promisc on
+modprobe pppoe
 ```
 
 - 设置网关：新建好一个与主路由网段一样的给旁路由用的网络
 
 ```
-docker network create -d macvlan --subnet=192.168.x.0/24 --gateway=192.168.x.1 -o parent=eth0 macnet
+docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.1 -o parent=eth0 macnet
 ```
 
->  其中**X**就是就是你主路由的网段。
+>  其中2.0,2.1是你主路由的网段。
 >
 
 - 运行docker
 
 ```
-docker run --restart always --name OpenWrt -d --network macnet --privileged kanshudj/n1-openwrtgateway:r9.10.1 /sbin/init
+docker run --restart always -d --network macnet --privileged kanshudj/n1-openwrtgateway:r9.10.1 /sbin/init
 ```
 
 ###  02 配置 Openwrt 
@@ -119,7 +119,7 @@ config interface 'lan'
         option ipaddr '192.168.X.2'
         option netmask '255.255.255.0'
         option gateway '192.168.X.1'
-        option dns '可以修改为114.114.114.114'
+        option dns '114.114.114.114 223.5.5.5'
 ```
 
 > 网关改成自定义的

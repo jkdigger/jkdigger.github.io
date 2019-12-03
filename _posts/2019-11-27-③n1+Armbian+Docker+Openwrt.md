@@ -259,25 +259,6 @@ config interface 'lan'
 >
 > 密码 password
 
-## 更新openwrt方法
-
-- 登录docker容器管理页
-- 在containers点remove移除旧版op容器
-- 再在image移除旧版op镜像
-
-> 也可以不移除，因为可以多个op共存，但每个op的ip不能相同。建议kill 停止或干脆移除，多个op运行，负载可能变高
-
--   重启设备
-- 重新安装部署op容器
-
-> 与首次安装不同的是，更新安装无需执行
->
-> ```
-> docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.1 -o parent=eth0 macne
-> ```
->
-> 因为首次安装时已搭建好虚拟网关。
-
 ## 参考资料
 
 -  [梁非凡n1玩法](https://github.com/real-pin1group/3000web/wiki/playerdev_n1) 

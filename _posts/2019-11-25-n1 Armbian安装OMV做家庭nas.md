@@ -66,8 +66,17 @@ apt install openmediavault
 
 ### 03 修复安装错误
 
+- 安装出现错误后，输入如下命令即可安装成功
+
 ```
 apt --fix-broken install
+```
+
+- 浏览器输入n1 ip即可进入omv系统
+
+```
+默认用户名 admin 
+密码为：openmediavault
 ```
 
 ## 2. OMV必要设置
@@ -230,7 +239,7 @@ Asia/Shanghai
 
 > 勾选[启用]
 >
-> 修改登入密码
+> **修改登入密码**
 >
 > 保存并应用
 
@@ -240,81 +249,76 @@ Asia/Shanghai
 >
 > 保存并应用
 
-### 03 transmission优化
+### 03  transmission汉化
 
-- 浏览器中输入 n1的ip:9091
+- ssh登入n1
+- 输入如下命令
 
-> 用户名 admin
->
-> 密码 admin（修改后的密码）
+```
+wget https://github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control-cn.sh
 
-- 修改 transmission中文界面
+chmod +x install-tr-control-cn.sh
 
-> ssh登入n1
->
-> ```
-> wget https://github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control-cn.sh
-> 
-> chmod +x install-tr-control-cn.sh
-> 
-> bash install-tr-control-cn.sh
-> ```
->
-> 此时出现中文件界面，按照提示输入数字
->
-> ```
-> 1
-> ```
->
-> 此时刷新页面`n1的ip:9091`即可看到新界面
->
-> ```
+bash install-tr-control-cn.sh
+```
+
+- 此时出现中文件界面，按照提示输入数字
+
+```
+1
+```
+
+- 此时刷新页面`n1的ip:9091`即可看到新界面
+
 > 如果没有看到说明浏览器缓存了，强制刷新Ctrl + F5或清除缓存
-> ```
 
-- 自动更新tracker：[参考](https://github.com/AndrewMarchukov/tracker-add)
+### 04 自动更新tracker
 
-> - moba登入n1
->
-> - 在 opt下新建bin文件夹
->
-> - 下载两个脚本
->
-> ```
-> wget --no-check-certificate -O /opt/bin/add-trackers-auto.sh https://raw.githubusercontent.com/AndrewMarchukov/tracker-add/master/tracker-add-auto.sh
-> 
-> wget --no-check-certificate -O /etc/systemd/system/transmission-tracker-add.service https://raw.githubusercontent.com/AndrewMarchukov/tracker-add/master/transmission-tracker-add.service
-> ```
->
-> 给执行权限
->
-> ```
-> chmod +x /opt/bin/add-trackers-auto.sh
-> ```
->
+[参考](https://github.com/AndrewMarchukov/tracker-add)
+
+- moba登入n1
+- 在 opt下新建bin文件夹
+- 下载两个脚本
+
+```
+wget --no-check-certificate -O /opt/bin/add-trackers-auto.sh https://raw.githubusercontent.com/AndrewMarchukov/tracker-add/master/tracker-add-auto.sh
+```
+
+```
+wget --no-check-certificate -O /etc/systemd/system/transmission-tracker-add.service https://raw.githubusercontent.com/AndrewMarchukov/tracker-add/master/transmission-tracker-add.service
+```
+
+- 给执行权限
+
+```
+chmod +x /opt/bin/add-trackers-auto.sh
+```
+
+- 编辑`opt`目录下的`add-trackers-auto.sh`
+
 > 设置文件中用户名密码，如果没有修改为“：”
->
-> Set user and password in add-trackers-auto.sh
->
-> 自启动设置
->
-> ```
-> systemctl daemon-reload
-> systemctl enable transmission-tracker-add.service
-> systemctl start transmission-tracker-add.service
-> ```
->
-> 查看状态
->
-> ```
-> systemctl status transmission-tracker-add.service
-> ```
->
-> ctrl+c退出
->
-> 注意：完成后添加种子就会自动更新 tracker
 
-### 04 登入transmission
+- 自启动设置
+
+```
+systemctl daemon-reload
+systemctl enable transmission-tracker-add.service
+systemctl start transmission-tracker-add.service
+```
+
+- 查看状态
+
+```
+systemctl status transmission-tracker-add.service
+```
+
+- ctrl+c退出
+
+> 此时，添加种子就会自动更新 tracker
+
+
+
+### 05 启用随机端口
 
 - 浏览器中输入n1的ip:9091即可进入transmission
 
