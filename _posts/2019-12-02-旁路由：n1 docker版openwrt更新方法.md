@@ -7,7 +7,8 @@ author:     "jkdigger"
 header-img: 
 catalog: true
 tags:
-    - n1刷机
+    - n1刷机	
+	- openwrt
 ---
 
 ### 说明

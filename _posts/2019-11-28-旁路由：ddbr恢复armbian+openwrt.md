@@ -1,13 +1,14 @@
 ---
 layout:     post
-title:      ddbr恢复n1旁路由系统
-subtitle:  使用gz格式的备份文件恢复
+title:      ddbr恢复armbian系统
+subtitle:  	armbian+openwrt
 date:       2019-11-28 18:00:00
 author:     "jkdigger"
 header-img: 
 catalog: true
 tags:
     - n1刷机
+	- 恢复系统
 ---
 
 

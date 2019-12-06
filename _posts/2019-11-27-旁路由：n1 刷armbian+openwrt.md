@@ -1,13 +1,14 @@
 ---
 layout:     post
 title:      n1+Armbian+Docker+Openwrt
-subtitle:   n1盘路由方案
+subtitle:   作旁路由
 date:       2019-11-27 18:00:00
 author:     "jkdigger"
 header-img: 
 catalog: true
 tags:
     - n1刷机
+	- 旁路由
 ---
 
 
