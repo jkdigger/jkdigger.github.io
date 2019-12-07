@@ -104,8 +104,24 @@ config interface 'lan'
 ```
 
 - 按`Esc`，输入`:wq!`保存并退出编辑
-- 点击 [disconnect]
-- 在 containers处：勾选op→点击 [restart]
+- 重启网络
+
+```
+/etc/init.d/network restart
+```
+
+> 重启网络也可以用这种方法：
+>
+> - 点击 [disconnect]
+> - 在 containers处：勾选op→点击 [restart]
+
+- 退出openwrt shell
+
+```
+exit
+```
+
+- 等一会浏览器中输入1.2.168.2.2 即可进入op
 
 ### 05 登入openwrt
 

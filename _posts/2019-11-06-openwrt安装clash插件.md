@@ -88,9 +88,8 @@ option check_signature
 
 ```
 arch all 100
-arch aarch64_cortex-a53 200
-arch aarch64_generic 300
-
+arch aarch64_generic 200
+arch aarch64_cortex-a53 300
 ```
 
 - 追加后完成信息如下
