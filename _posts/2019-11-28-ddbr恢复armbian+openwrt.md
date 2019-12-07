@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      ddbr恢复armbian系统
-subtitle:  	armbian+openwrt
+title:      ddbr恢复Armbian系统
+subtitle:  	Armbian+Openwrt
 date:       2019-11-28 18:00:00
 author:     "jkdigger"
 header-img: 

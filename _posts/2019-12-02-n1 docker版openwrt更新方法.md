@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      n1 docker版openwrt更新方法
+title:      n1 Docker版Openwrt更新方法
 subtitle:   Armbian+Docker+Openwrt
 date:       2019-12-02 18:00:00
 author:     "jkdigger"

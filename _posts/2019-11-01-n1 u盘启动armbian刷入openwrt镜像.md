@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:     n1 u盘启动armbian，刷入openwrt镜像
+title:     n1 u盘启动Armbian，刷入Openwrt镜像
 subtitle:   
 date:        2019-11-01 18:26:30
 author:     "jkdigger"

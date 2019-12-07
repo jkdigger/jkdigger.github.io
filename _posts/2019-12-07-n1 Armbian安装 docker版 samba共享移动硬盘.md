@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      n1 Armbian安装docker版samba共享移动硬盘
+title:      n1 Armbian安装Docker版Samba共享移动硬盘
 subtitle:   n1 Armbian Docker Samba
 date:       2019-12-06 18:00:00
 author:     "jkdigger"
