@@ -356,13 +356,15 @@ exit
 >
 > 密码 password
 
-- 添加防火墙规则
+#### ①添加防火墙规则
 
 ```
 iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 ```
 
-- n1只负责网关
+#### ②旁路由设置
+
+> n1只负责网关
 
 ```
 DHCP服务器 勾选 忽略此接口
@@ -374,7 +376,7 @@ DHCP服务器 勾选 忽略此接口
 
 > 需要科学上网的设备：ip自定义+dns和网关设为192.168.2.2，网段前缀24
 
-- 安装clash
+### 04 安装clash（可选）
 
 > [openwrt安装clash插件](http://jkdigger.me/2019/11/06/openwrt%E5%AE%89%E8%A3%85clash%E6%8F%92%E4%BB%B6/)
 
