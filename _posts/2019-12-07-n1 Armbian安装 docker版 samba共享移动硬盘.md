@@ -144,4 +144,5 @@ reboot
 
 - [Linux配置硬盘自动挂载](https://www.jianshu.com/p/336758411dbf)
 - [ 30多个N1可用docker镜像](https://www.right.com.cn/forum/thread-911375-1-1.html)
+- [Docker安装samba共享目录](https://dylanyang.top/post/2019/05/22/docker%E5%AE%89%E8%A3%85samba%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/)
 
