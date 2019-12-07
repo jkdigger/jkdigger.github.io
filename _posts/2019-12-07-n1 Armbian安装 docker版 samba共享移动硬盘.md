@@ -40,25 +40,7 @@ docker run -d \
   lstcml/samba
 ```
 
-####  ②安装方法二（未测试）
-
-非host模式
-
-```
-docker run -d \
-  --name samba \
-  --restart=always  \
-  -p 137:137/udp \
-  -p 138:138/udp \
-  -p 139:139/tcp \
-  -p 445:445/tcp \
-  -v /docker/samb/conf:/etc/samba \
-  -v /docker/samb/share:/mnt/share \
-  -v /docker/samb/data:/mnt/data \
-  lstcml/samba
-```
-
-#### ③使用samba
+#### ②使用samba
 
 安装命令结束，即可在电脑上访问samab。可以看到data和share目录
 
@@ -73,7 +55,7 @@ share目录：不需要输入用户名和密码就能访问，拥有读写删权
 
 docker配置： docker/samb/conf
 
-#### ④给予权限
+#### ②给予权限
 
 >  如果在电脑上创建文件时，提示访问没权限，说明映射到宿主机的目录没有权限
 
@@ -127,7 +109,7 @@ vi /etc/fstab
 - 按i进入编辑模式，
 
 ```
-UUID=589A8FB59A8F8E66 /docker/samb/data ntfs defaults 0 1
+UUID="589A8FB59A8F8E66" /docker/samb/data ntfs defaults 0 1
 ```
 
 >  ```
