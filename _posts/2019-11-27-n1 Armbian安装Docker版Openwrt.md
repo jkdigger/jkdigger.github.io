@@ -10,15 +10,9 @@ tags:
     - n1刷机
 ---
 
+## 前言
 
-
-
-
-## 使用效果
-
-- 百兆宽带下使用k2p做为主路由，n1作为旁路由时youtube测速结果。
-
-![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191127115520.jpg)
+使用这种方式安装openwrt，更新固件方便。此外，可以安装docker版samba，做nas共享移动硬盘。
 
 ## 准备工作
 
