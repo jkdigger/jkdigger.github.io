@@ -38,6 +38,15 @@ reboot
 
 ### 03 部署op
 
+#### 本地导入（方法一）
+
+> ```
+> docker import 镜像 自定义标签名
+> docker run --restart always -d --network macnet --privileged 自定义标签名 /sbin/init
+> ```
+>
+> `openwrt:R9.10.1` 为 自定义标签名
+
 - 把tar.gz的镜像拖入到root文件夹
 - 导入镜像
 
@@ -45,29 +54,52 @@ reboot
 docker import openwrt-armvirt-64-default-rootfs.tar.gz openwrt:R9.10.1
 ```
 
-> docker import+镜像+自定义标签名
-
 - 部署镜像
 
 ```
 docker run --restart always -d --network macnet --privileged openwrt:R9.10.1 /sbin/init
 ```
 
-> 如果之前没有部署过op，则需要输入完整的部署命令为：
+#### 拉取镜像（方法二）
+
+> ```
+> docker pull 作者/镜像名:标签
+> docker run --restart always -d --network macnet --privileged 作者/镜像名:标签 /sbin/init
+> ```
 >
-> ```
-> docker import openwrt-armvirt-64-default-rootfs.tar.gz openwrt:R9.10.1
-> ip link set eth0 promisc on
-> modprobe pppoe
-> docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.1 -o parent=eth0 macnet
-> docker run --restart always -d --network macnet --privileged openwrt:R9.10.1 /sbin/init
-> ```
+> `kanshudj/n1-openwrtgateway:r9.10.1` 为 `作者/镜像名:标签`
+
+- 拉取镜像
+
+```
+docker pull kanshudj/n1-openwrtgateway:r9.10.1
+```
+
+- 部署镜像
+
+```
+docker run --restart always -d --network macnet --privileged kanshudj/n1-openwrtgateway:r9.10.1 /sbin/init
+```
 
 
 
 > 说明：如果刷入的是梁非凡的固件，此时已经可以输入192.168.2.3登入openwrt，不需要进行下面的步骤。
 >
 > 梁非凡固件说明：如果你的路由器网段是192.168.2.x，可直接浏览器输入ip 192.168.2.3 登入管理页，否则就按教程修改ip，密码password
+
+#### 推荐的op镜像
+
+- [breakersun/openwrt](https://hub.docker.com/r/breakersun/openwrt)
+
+> breakersun/openwrt:aarch64
+> 按照原计划维护，含openclash以及较多组件
+>
+> ![breakersun/openwrt:aarch64](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191212120122.png)
+>
+> breakersun/openwrt:pigroup
+> 新增：群主老大最新发布的固件（精简，仅含hello world）
+
+- 梁非凡docker版op
 
 ### 04 配置 openwrt
 
@@ -97,11 +129,36 @@ config interface 'lan'
         option type 'bridge'
         option ifname 'eth0'
         option proto 'static'
-        option ipaddr '192.168.X.2'
+        option ipaddr '192.168.2.2'
         option netmask '255.255.255.0'
-        option gateway '192.168.X.1'
+        option gateway '192.168.2.1'
         option dns '114.114.114.114 223.5.5.5'
 ```
+
+> ```
+> config interface 'loopback'
+>         option ifname 'lo'
+>         option proto 'static'
+>         option ipaddr '127.0.0.1'
+>         option netmask '255.0.0.0'
+> 
+> config globals 'globals'
+>         option ula_prefix 'fddd:594f:f602::/48'
+> 
+> config interface 'lan'
+>         option type 'bridge'
+>         option ifname 'eth0'
+>         option proto 'static'
+>         option ipaddr '192.168.2.3'
+>         option netmask '255.255.255.0'
+>         option ip6assign '60'
+>         option gateway '192.168.2.1'
+>         option dns '114.114.114.114 223.5.5.5'
+> 
+> config interface 'vpn0'
+>         option ifname 'tun0'
+>         option proto 'none'
+> ```
 
 - 按`Esc`，输入`:wq!`保存并退出编辑
 - 重启网络
@@ -143,9 +200,12 @@ iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 
 ```
 DHCP服务器 勾选 忽略此接口
+关闭ipv6
 ```
 
 ![n1只负责网关](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191206200607.png)
+
+![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191212122439.png)
 
 - 主路由不做任何更改
 
