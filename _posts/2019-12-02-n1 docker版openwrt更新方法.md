@@ -100,8 +100,65 @@ docker run --restart always -d --network macnet --privileged kanshudj/n1-openwrt
 > 新增：群主老大最新发布的固件（精简，仅含hello world）
 
 - 梁非凡docker版op
+- [wky0211/pin1-openwrt:R91215](https://hub.docker.com/r/wky0211/pin1-openwrt)
 
 ### 04 配置 openwrt
+
+#### 方法一（推荐）
+
+- 查看镜像
+
+```
+docker ps
+```
+
+- 进入镜像
+
+```
+docker exec -it ‘container id’ sh
+```
+
+> ‘container id’ 是一串数字
+
+- 编辑网络
+
+```
+vi /etc/config/network
+```
+
+- 输入i进入编辑，同样将**x**改为你主路由的网段
+
+```
+config interface 'lan'
+        option type 'bridge'
+        option ifname 'eth0'
+        option proto 'static'
+        option ipaddr '192.168.2.2'
+        option netmask '255.255.255.0'
+        option gateway '192.168.2.1'
+        option dns '114.114.114.114 223.5.5.5'
+```
+
+- 按`Esc`，输入`:wq!`保存并退出编辑
+- 重启网络
+
+```
+/etc/init.d/network restart
+```
+
+- 退出docker
+
+```
+exit
+```
+
+- 重启
+
+```
+reboot
+```
+
+#### 方法二
 
 > chrome进入vi可能存在问题，可以换edge浏览器解决。
 
