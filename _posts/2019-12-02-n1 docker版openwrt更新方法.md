@@ -139,6 +139,31 @@ config interface 'lan'
         option dns '114.114.114.114 223.5.5.5'
 ```
 
+> ```
+> config interface 'loopback'
+>         option ifname 'lo'
+>         option proto 'static'
+>         option ipaddr '127.0.0.1'
+>         option netmask '255.0.0.0'
+> 
+> config globals 'globals'
+>         option ula_prefix 'fd2f:ea21:0e02::/48'
+> 
+> config interface 'lan'
+>         option type 'bridge'
+>         option ifname 'eth0'
+>         option proto 'static'
+>         option ipaddr '192.168.2.2'
+>         option netmask '255.255.255.0'
+>         option gateway '192.168.2.1'
+>         option dns '114.114.114.114 223.5.5.5'
+> 
+> config interface 'vpn0'
+>         option ifname 'tun0'
+>         option proto 'none'
+> 
+> ```
+
 - 按`Esc`，输入`:wq!`保存并退出编辑
 - 重启网络
 

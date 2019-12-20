@@ -288,6 +288,87 @@ docker run --restart always -d --network macnet --privileged kanshudj/n1-openwrt
 
 ###  02 配置 Openwrt 
 
+#### 方法一（推荐）
+
+- 查看镜像
+
+```
+docker ps
+```
+
+- 进入镜像
+
+```
+docker exec -it ‘container id’ sh
+```
+
+> ‘container id’ 是一串数字
+
+- 编辑网络
+
+```
+vi /etc/config/network
+```
+
+- 输入i进入编辑，同样将**x**改为你主路由的网段
+
+```
+config interface 'lan'
+        option type 'bridge'
+        option ifname 'eth0'
+        option proto 'static'
+        option ipaddr '192.168.2.2'
+        option netmask '255.255.255.0'
+        option gateway '192.168.2.1'
+        option dns '114.114.114.114 223.5.5.5'
+```
+
+> ```
+> config interface 'loopback'
+>      option ifname 'lo'
+>      option proto 'static'
+>      option ipaddr '127.0.0.1'
+>      option netmask '255.0.0.0'
+> 
+> config globals 'globals'
+>      option ula_prefix 'fd2f:ea21:0e02::/48'
+> 
+> config interface 'lan'
+>      option type 'bridge'
+>      option ifname 'eth0'
+>      option proto 'static'
+>      option ipaddr '192.168.2.2'
+>      option netmask '255.255.255.0'
+>      option gateway '192.168.2.1'
+>      option dns '114.114.114.114 223.5.5.5'
+> 
+> config interface 'vpn0'
+>      option ifname 'tun0'
+>      option proto 'none'
+> 
+> ```
+
+- 按`Esc`，输入`:wq!`保存并退出编辑
+- 重启网络
+
+```
+/etc/init.d/network restart
+```
+
+- 退出docker
+
+```
+exit
+```
+
+- 重启
+
+```
+reboot
+```
+
+#### 方法二
+
 > chrome进入vi可能存在问题，可以换edge浏览器解决。
 
 - 登入docker图形管理界面
@@ -299,7 +380,7 @@ n1的ip:9000
 - 点[container]
 - 选择刚导入的镜像→ 点击 `>_` → 点击 [Connect]
 
-![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191126235631.png)
+![img](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191126235631.png)
 
 - 按i改网关信息
 
@@ -318,15 +399,39 @@ config interface 'lan'
         option netmask '255.255.255.0'
         option gateway '192.168.2.1'
         option dns '114.114.114.114 223.5.5.5'
-        option ip6assign '60'       #flippy大神的镜像中有的项目，可以不加
 ```
 
-- 按`Esc`，输入`:wq!`保存并退出编辑
+> ```
+> config interface 'loopback'
+>      option ifname 'lo'
+>      option proto 'static'
+>      option ipaddr '127.0.0.1'
+>      option netmask '255.0.0.0'
+> 
+> config globals 'globals'
+>      option ula_prefix 'fddd:594f:f602::/48'
+> 
+> config interface 'lan'
+>      option type 'bridge'
+>      option ifname 'eth0'
+>      option proto 'static'
+>      option ipaddr '192.168.2.3'
+>      option netmask '255.255.255.0'
+>      option ip6assign '60'
+>      option gateway '192.168.2.1'
+>      option dns '114.114.114.114 223.5.5.5'
+> 
+> config interface 'vpn0'
+>      option ifname 'tun0'
+>      option proto 'none'
+> ```
 
+- 按`Esc`，输入`:wq!`保存并退出编辑
 - 重启网络
 
 ```
 /etc/init.d/network restart
+
 ```
 
 > 重启网络也可以用这种方法：
