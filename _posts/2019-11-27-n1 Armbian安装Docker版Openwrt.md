@@ -207,9 +207,15 @@ nslookup www.baidu.com
 docker pull kanshudj/n1-openwrtgateway:r9.10.1
 ```
 
-> kanshudj/n1-openwrtgateway:r9.10.1为镜像名称
+> mix70周年 `kanshudj/n1-openwrtgateway:r9.10.1`
 >
-> flippy大神的镜像 unifreq/openwrt-aarch64:r9.12.03
+> flippy大神的镜像  `unifreq/openwrt-aarch64:r9.12.03`
+>
+> 手动导入镜像，`openwrt-armvirt-64-default-rootfs.tar.gz`为镜像名
+>
+> ```
+> docker import openwrt-armvirt-64-default-rootfs.tar.gz openwrt:R9.10.1
+> ```
 
 - 开启网卡的混合模式
 
@@ -258,8 +264,6 @@ docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.1 -
 > ```
 
 
-
-
 - 创建 OpenWrt 容器
 
 ```
@@ -267,16 +271,20 @@ docker run --restart always -d --network macnet --privileged kanshudj/n1-openwrt
 ```
 
 > ```
+> docker run --restart always -d --network macnet --privileged openwrt:R9.10.1 /sbin/init
+> ```
+>
+> ```
 > # 运行
 > docker run -d \
->     --name=OpenWrt \
->     --restart always \
->     --privileged \
->     --network macvlan_lan \
->     --ip 192.168.2.100 \
->     unifreq/openwrt-aarch64:r9.11.23
->     #kanshudj/n1-openwrtgateway:r9.10.1
->     
+>  --name=OpenWrt \
+>  --restart always \
+>  --privileged \
+>  --network macvlan_lan \
+>  --ip 192.168.2.100 \
+>  unifreq/openwrt-aarch64:r9.11.23
+>  #kanshudj/n1-openwrtgateway:r9.10.1
+>  
 > # 运行参数：
 > -d                  # 后台运行
 > --name              # 设定该容器名字

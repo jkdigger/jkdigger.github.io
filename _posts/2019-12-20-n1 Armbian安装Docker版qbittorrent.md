@@ -12,7 +12,15 @@ tags:
 
 ## 安装Docker版qbittorrent
 
-### 01 输入名字和镜像地址
+### 01 ssh连接n1拉取镜像
+
+```
+docker pull linuxserver/qbittorrent:latest
+```
+
+### 02 输入名字和镜像地址
+
+- 浏览器登入docker管理页面
 
 ![输入名字和镜像地址](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191220200343.png)
 
@@ -27,23 +35,6 @@ qbittorrent
 ```
 linuxserver/qbittorrent:latest
 ```
-
-###  02 设置Network ports configuration 
-
-![设置端口](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191220201626.png)
-
-- 点击publish a new network port
-- 输入host和container点击TCP或UDP
-
-```
-6881/6881 TCP
-6881/6881 UDP
-8084/8084 TCP
-8084/8084 UDP
-```
-
-> 上面那个6881是跟qb里面的监听端口同步
-> 下面那个8084是跟WEBUI_PORT的端口同步的
 
 ### 03 设置Volumes
 
@@ -62,10 +53,10 @@ linuxserver/qbittorrent:latest
 - host 输入
 
 ```
-/etc/docker_qbittorrent
+/docker/qbittorrent
 ```
 
-> 提前把docker_qbittorrent文件夹创建好或者写其他目录也可以。
+> 提前把docker/qbittorrent文件夹创建好或者写其他目录也可以。
 
 - 点击bind
 
@@ -107,7 +98,24 @@ WEBUI_PORT → 8084
 
 > WEBUI_PORT是写你访问qb时，再ip后输入的端口，可以写其他端口，比如8084
 
-### 05 部署容器
+###  05 设置Network ports configuration 
+
+![设置端口](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191220201626.png)
+
+- 点击publish a new network port
+- 输入host和container点击TCP或UDP
+
+```
+6881/6881 TCP
+6881/6881 UDP
+8084/8084 TCP
+8084/8084 UDP
+```
+
+> 上面那个6881是跟qb里面的监听端口同步
+> 下面那个8084是跟WEBUI_PORT的端口同步的
+
+### 06 部署容器
 
 ![Deploy the container](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191220201800.png)
 
