@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      n1 Armbian安装Docker版Openwrt
-subtitle:   Armbian+Docker+Openwrt
+subtitle:   安装Docker版Openwrt
 date:       2019-11-27 18:00:00
 author:     "jkdigger"
 header-img: 
