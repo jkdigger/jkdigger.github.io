@@ -53,10 +53,11 @@ linuxserver/qbittorrent:latest
 - host 输入
 
 ```
-/docker/qbittorrent
+/etc/docker_qbittorrent
+/etc/docker_transmission
 ```
 
-> 提前把docker/qbittorrent文件夹创建好或者写其他目录也可以。
+> 提前把 /etc/docker_qbittorrent 文件夹创建好或者写其他目录也可以。
 
 - 点击bind
 
