@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      n1 Armbian安装Docker版aria2和aria2-webui
-subtitle:   安装aria2和aria2 web ui
+title:      n1 Armbian安装Docker版aria2和aria2 webui
+subtitle:   安装aria2和aria2 webui
 date:       2019-12-31 18:00:00
 author:     "jkdigger"
 header-img: 
