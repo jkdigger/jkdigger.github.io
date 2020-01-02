@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      n1 Armbian安装Docker版Samba共享移动硬盘
-subtitle:   n1 Armbian Docker Samba
+subtitle:   安装Docker版Samba
 date:       2019-12-06 18:00:00
 author:     "jkdigger"
 header-img: 
@@ -11,11 +11,9 @@ tags:
     - docker
 ---
 
-## 说明
+## 安装Docker版Samba
 
 在使用docker版openwrt的情况下的，通过安装docker版samba共享移动硬盘。
-
-## 共享移动硬盘
 
 ### 01 取消openwrt下的自动挂载
 
@@ -24,11 +22,9 @@ tags:
 - 系统→挂载点→全部取消勾选
 - 保存并应用
 
-### 02 安装samab
+### 02 安装samab(方法一)
 
-#### ①安装方法一
-
-host模式
+- 运行镜像
 
 ```
 docker run -d \
@@ -41,37 +37,23 @@ docker run -d \
   lstcml/samba
 ```
 
-#### ②使用samba
+>  安装命令结束，即可在电脑上访问samab。可以看到data和share目录
+>
+> data目录：需要输入用户名和密码才能访问，拥有读写删权限
+> share目录：不需要输入用户名和密码就能访问，拥有读写删权限
+>
+> 默认用户账户密码：admin/admin
 
-安装命令结束，即可在电脑上访问samab。可以看到data和share目录
-
-```
-data目录：需要输入用户名和密码才能访问，拥有读写删权限
-share目录：不需要输入用户名和密码就能访问，拥有读写删权限
-```
-
-```
-默认用户账户密码：admin/admin
-```
-
-docker配置： docker/samb/conf
-
-#### ②给予权限
+- 给予权限
 
 >  如果在电脑上创建文件时，提示访问没权限，说明映射到宿主机的目录没有权限
-
-- ssh登入armbian
 
 ```
 chmod 777 /docker/samb/data
 chmod 777 /docker/samb/share
 ```
 
-### 03 Armbian下挂载移动硬盘
-
-- ssh连接Armbian系统
-
-- 查看移动硬盘硬盘
+- 查看移动硬盘
 
 ```
 blkid
@@ -87,7 +69,7 @@ blkid
 
 - 建立挂载点
 
-> 该目录已存在可以不用创建
+> 该目录已存在可以不用创建，如果不存在可以用如下命令创建
 >
 > ```
 > mkdir /docker/samb/data
@@ -110,7 +92,7 @@ vi /etc/fstab
 - 按i进入编辑模式，
 
 ```
-UUID="589A8FB59A8F8E66" /docker/samb/data ntfs defaults 0 1
+UUID="589A8FB59A8F8E66" /docker/samb/data ntfs defaults 0 0
 ```
 
 >  ```
@@ -140,6 +122,66 @@ mount -a
 ```
 reboot
 ```
+
+### 03 安装samab(方法二)
+
+- 运行镜像
+
+```
+docker run -d --restart=always -p 137:137/udp -p 138:138/udp -p 139:139 -p 445:445 -p 445:445/udp --hostname 'Armbian' -v /media/smb:/share/folder  elswork/samba -u "admin:admin" -s "FileShare:/share/folder:rw:admin"
+```
+
+> Armbian可改成你想要的名称
+>
+> FileShare为共享文件夹名称
+>
+> /media/smb可改成你要搭建的共享目录
+>
+> admin:admin可改成你的用户名和密码，最后的那个admin可改成你的用户名。
+
+- 访问smb
+
+```
+\\192.168.2.225\FileShare
+```
+
+> 192.168.2.225为n1的ip
+
+- 挂载移动硬盘到 `/media/smb`目录
+
+> 查看移动硬盘硬盘
+>
+> ```
+> blkid
+> ```
+>
+> 建立挂载点
+>
+> ```
+> mount -t ntfs /dev/sda1 /media/smb
+> ```
+>
+> 修改`/etc/fstab`,追加一行,实现开机自动挂载
+>
+> ```
+> vi /etc/fstab
+> ```
+>
+> ```
+> UUID="589A8FB59A8F8E66" /docker/samb/data ntfs defaults 0 0 
+> ```
+>
+> 验证一下配置是否正确
+>
+> ```
+> mount -a
+> ```
+>
+> 重启系统
+>
+> ```
+> reboot
+> ```
 
 ## 参考资料
 
