@@ -11,7 +11,9 @@ tags:
     - docker
 ---
 
-## 安装Docker版aria2和aria2-webui
+
+
+## 安装aria2（方案一）
 
 ### 01 下载文件
 
@@ -72,9 +74,7 @@ docker run --name aria2ui --restart always -p 6800:6800 -p 6801:6801 -p 51413:51
 比如输入 192.168.2.225:6801
 ```
 
-## aria2初始化设置
-
-### 01 设置登录secret
+### 04 设置登录secret
 
 - 登入aria2 web ui
 - 设置→连接设置→ 密码令牌（可选）处输入
@@ -83,7 +83,7 @@ docker run --name aria2ui --restart always -p 6800:6800 -p 6801:6801 -p 51413:51
 aria2.secret
 ```
 
-### 02 设置bttracker
+### 05 设置bttracker
 
 - moba登入n1
 - 打开之前上传的`root`目录下的`alpine-aria2-webui`文件夹
@@ -101,7 +101,7 @@ bt-tracker=udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.leechers-pa
 - 点击保存→点击弹出对话中的yes
 - 重启容器
 
-### 03 修改pt相关设置
+### 06 修改pt相关设置
 
 >  注意：如果需要下载pt需要进行额外的设置
 
@@ -144,6 +144,54 @@ bt-save-metadata=true
 
 - 保存→点击yes确认替换
 
+## 安装aria2（方案二）
+
+### 01 新建文件夹
+
+- moba连接n1
+- 在etc目录下创建 docker_aria2 文件夹
+- 给予权限
+
+```
+chmod 777 /etc/docker_aria2
+```
+
+### 02 运行aria2
+
+> /media/smb/aria2 是下载目录
+>
+> 8080是aria2 webui端口
+
+```
+docker run -d \
+    --name aria2-ui \
+    -p 8080:8080 \
+    -v /media/smb/aria2:/aria2/data \
+    -v /etc/docker_aria2:/aria2/conf \
+    -e PUID=1000 \
+    -e PGID=1000 \
+    -e ARIA2RPCPORT=443 \
+    -e RPC_SECRET=NOBODYKNOWSME \
+    hurlenko/aria2-ariang
+```
+
+### 03 登入aria2 webui
+
+- n1的ip:8080
+
+```
+比如 192.168.2.225:8080
+```
+
+- 修改端口和密钥
+
+```
+8080
+NOBODYKNOWSME
+```
+
+![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20200110200707.png)
+
 ## 通过aria2+pandownload下载百度云
 
 ### 01 设置远程主机
@@ -156,7 +204,9 @@ bt-save-metadata=true
 ```
 主机： n1的ip，比如 192.168.2.225
 端口： 6800
-token： aria2.secret
+token： 
+	aria2.secret（方案1）
+	NOBODYKNOWSME（方案2）
 ```
 
 - 检查连接
@@ -170,11 +220,13 @@ token： aria2.secret
 
 ![](https://raw.githubusercontent.com/jkdigger/picForBlog/master/images/20191231210545.png)
 
-> 此时已经可以去aria2 web ui中查看到刚刚添加的下载链接。
+> 此时已经可以去aria2 webui中查看到刚刚添加的下载链接。
 
 ## 参考资料
 
-- [tonynii/alpine-aria2-webu](https://github.com/tonynii/alpine-aria2-webui)
+- [方案一](https://github.com/tonynii/alpine-aria2-webui)
+- [方案二](https://github.com/hurlenko/aria2-ariang-docker#docker)
 - [N1 Coreelec 利用Docker搭建aria2和webUI ](https://www.right.com.cn/forum/thread-810527-9-1.html)
 - [解决ARIA2 BT下载速度慢没速度的问题:TRACKER和DHT](https://www.tjflora.com/archives/359)
 - [pandownload远程下载](https://pandownload.com/document/remote.html)
+
