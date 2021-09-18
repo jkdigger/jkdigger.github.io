@@ -9,18 +9,19 @@ header-img: "img/post-bg-debug.png"
 <h2>我的博客：素修藏金</h2>
 
 <ul>
-<li>博客地址：<a href="https://jkdigger.me/">jkdigger.me</a></li>
-<li>Twitter：<a href="https://twitter.com/jkdigger">jkdigger</a></li>
-<li>Github：<a href="https://github.com/jkdigger">jkdigger</a></li>
-<li>邮箱：<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x6a;&#x6b;&#100;&#x69;&#x67;&#x67;&#x65;&#114;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;">&#106;&#107;&#x64;&#x69;&#x67;&#x67;&#101;&#x72;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#x6f;&#x6d;</a></li>
-<li>我的telegram频道：<a href="https://t.me/outershare">@outershare</a></li>
+    <li>博客地址：<a href="https://jkdigger.me/">jkdigger.me</a></li>
+    <li>Github：<a href="https://github.com/jkdigger">jkdigger</a></li>
+    <li>邮箱：<a
+            href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x6a;&#x6b;&#100;&#x69;&#x67;&#x67;&#x65;&#114;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;">&#106;&#107;&#x64;&#x69;&#x67;&#x67;&#101;&#x72;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>
+    </li>
 </ul>
 
 <p><strong>博客模板来自于</strong> </p>
 
 <ul>
-<li><a href="https://github.com/qiubaiying/qiubaiying.github.io#featured-tags">qiubaiying/qiubaiying.github.io</a></li>
-<li><a href="https://github.com/Huxpro/huxpro.github.io/blob/master/README.zh.md">Huxpro/huxpro.github.io</a></li>
+    <li><a href="https://github.com/qiubaiying/qiubaiying.github.io#featured-tags">qiubaiying/qiubaiying.github.io</a>
+    </li>
+    <li><a href="https://github.com/Huxpro/huxpro.github.io/blob/master/README.zh.md">Huxpro/huxpro.github.io</a></li>
 </ul>
 
 <!-- Gitalk 评论 start  -->
@@ -30,22 +31,22 @@ header-img: "img/post-bg-debug.png"
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
 
 <div id="gitalk-container"></div>
-    <script type="text/javascript">
+<script type="text/javascript">
     var gitalk = new Gitalk({
-    clientID: '{{site.gitalk.clientID}}',
-    clientSecret: '{{site.gitalk.clientSecret}}',
-    repo: '{{site.gitalk.repo}}',
-    owner: '{{site.gitalk.owner}}',
-    admin: ['{{site.gitalk.admin}}'],
-    distractionFreeMode: {{site.gitalk.distractionFreeMode}},
+        clientID: '{{site.gitalk.clientID}}',
+        clientSecret: '{{site.gitalk.clientSecret}}',
+        repo: '{{site.gitalk.repo}}',
+        owner: '{{site.gitalk.owner}}',
+        admin: ['{{site.gitalk.admin}}'],
+        distractionFreeMode: {{ site.gitalk.distractionFreeMode }},
     id: 'about',
     });
     gitalk.render('gitalk-container');
-    </script>
+</script>
 {% endif %}
 <!-- Gitalk end -->
 
- <!-- disqus 评论框 start  -->
+<!-- disqus 评论框 start  -->
 {% if site.disqus.enable %}
 
 <div class="comment">
@@ -61,7 +62,7 @@ header-img: "img/post-bg-debug.png"
     var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
     var disqus_url = "{{site.url}}{{page.url}}";
 
-    (function() {
+    (function () {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -69,4 +70,3 @@ header-img: "img/post-bg-debug.png"
 </script>
 <!-- disqus 公共JS代码 end -->
 {% endif %}
-
