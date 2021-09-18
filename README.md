@@ -1,7 +1,6 @@
 ## 我的博客：素修藏金
 
 - 博客：[jkdigger.me]( https://jkdigger.me/ )
-- Twitter：[jkdigger](https://twitter.com/jkdigger)
 - Github：[jkdigger](https://github.com/jkdigger)
 - 邮箱：[jkdigger@163.com](mailto:jkdigger@163.com)
 
